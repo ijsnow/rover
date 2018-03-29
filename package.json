@@ -1,0 +1,36 @@
+{
+  "name": "rover",
+  "version": "0.0.1",
+  "description": "Override resources for easier development in Chrome and FF",
+  "main": "index.js",
+  "scripts": {
+    "start": "./scripts/start.sh",
+    "start:firefox": "web-ext run -s ./dist",
+    "watch": "node ./scripts/watch.js",
+    "bundle": "./scripts/bundle.sh",
+    "build:dev": "webpack --watch --mode=development",
+    "build:prod": "webpack --mode=production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/lodash": "^4.14.106",
+    "@types/whatwg-url": "^6.4.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "concurrently": "^3.5.1",
+    "ts-loader": "^4.1.0",
+    "tslint": "^5.9.1",
+    "tslint-config-prettier": "^1.10.0",
+    "typescript": "^2.8.1",
+    "web-ext": "^2.5.0",
+    "webpack": "^4.4.1",
+    "webpack-cli": "^2.0.13"
+  },
+  "dependencies": {
+    "lodash": "^4.17.5",
+    "whatwg-url": "^6.4.0"
+  }
+}

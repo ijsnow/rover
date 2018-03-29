@@ -1,0 +1,25 @@
+{
+  "description": "Rewrite outgoing request URLs",
+  "manifest_version": 2,
+  "name": "Rover",
+  "applications": {
+    "gecko": {
+      "id": "isaacjsnow@gmail.com"
+    }
+  },
+  "version": "0.0.1",
+  "homepage_url": "https://github.com/ijsnow/rover",
+  "permissions": [
+    "storage",
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": ["main.bundle.js"]
+  },
+  "omnibox": {
+    "keyword": "rover"
+  }
+}
