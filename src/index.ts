@@ -1,41 +1,49 @@
-import { find } from "lodash";
-import { addOverride, getOverrides, Override } from "./storage";
+import {find} from 'lodash';
+import {addOverride, getOverrides, Override} from './storage';
 
-const handleOutgoingRequest = ({
-  url
+const BLOCK = '<block>';
+
+const handleOverrideHeaders = ({
+  url,
 }: browser.webRequest.WebRequestHeadersDetails): Promise<
   browser.webRequest.BlockingResponse
 > =>
   getOverrides().then(overrides => {
-    const match = find(overrides, ({ from }: Override) => from === url);
-    if (match) {
-      return { redirectUrl: match.to };
+    const match = find(overrides, ({from}: Override) => from === url);
+    if (!match) {
+      return {};
     }
+
+    // TODO: Add content script that listens for things we want to log in the console like this below
+    if (match.to === BLOCK) {
+      // tslint:disable-next-line:no-console
+      console.info(`[rover] Blocking request to ${match.from}`);
+      return {cancel: true};
+    }
+
+    return {redirectUrl: match.to};
   });
 
 browser.webRequest.onBeforeSendHeaders.addListener(
-  handleOutgoingRequest,
-  // TODO: Probably can create patters out of urls from options
-  { urls: ["<all_urls>"] },
-  ["blocking", "requestHeaders"]
+  handleOverrideHeaders,
+  // TODO: Probably can create patterns out of urls from options
+  {urls: ['<all_urls>']},
+  ['blocking', 'requestHeaders'],
 );
 
-(window as any).addOverride = addOverride;
-
 browser.omnibox.setDefaultSuggestion({
-  description: "Add override: <from> <to>"
+  description: 'Add override: <from> <to>',
 });
 
 function handleOverrideAdd(text: string) {
-  const [from, to] = text.trim().split(" ");
+  const [from, to] = text.trim().split(' ');
 
-  addOverride({ from, to });
+  addOverride({from, to: to || BLOCK});
 }
 
 browser.omnibox.onInputEntered.addListener(handleOverrideAdd);
 
 // TODO: Basic commands
-//
 // add <from> <to>
 // rm <index>
 //   rm should suggest the list of overrides
