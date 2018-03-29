@@ -53,3 +53,8 @@ browser.omnibox.onInputEntered.addListener(handleOverrideAdd);
 //   duplicate should suggest the list
 //
 // commands that suggest should fuzzy match with items in the list
+//
+// TODO: Url matching
+//
+// To start, pattern match for both host and path
+// Eventually, add variable support like *://google.com/{0}/stuff -> *://ijsnow.me/{0}
