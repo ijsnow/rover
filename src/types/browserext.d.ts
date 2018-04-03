@@ -115,6 +115,88 @@ declare namespace browser.omnibox {
   export var onInputCancelled: OmniboxInputCancelledEvent;
 }
 
+declare namespace browser.tabs {
+  export interface Tab {
+    id?: number;
+    status?: 'loading' | 'complete';
+    url?: string;
+    title?: string;
+    windowId: number;
+    active: boolean;
+    index: number;
+  }
+
+  export interface ConnectInfo {
+    name?: string;
+    frameId?: number;
+  }
+
+  export interface SendMessageOptions {
+    frameId: number;
+  }
+
+  export function sendMessage(
+    tabId: number,
+    message: any,
+    options?: SendMessageOptions,
+  ): Promise<any>;
+
+  export function connect(
+    tabId: number,
+    connectInfo?: ConnectInfo,
+  ): runtime.Port;
+
+  export function getCurrent(): Promise<Tab | undefined>;
+}
+
+declare namespace browser.runtime {
+  export interface MessageSender {
+    tab?: browser.tabs.Tab;
+    id?: string;
+    frameId?: number;
+    url?: string;
+    tlsChannelId?: string;
+  }
+
+  export interface MessageReceivedEvent
+    extends browser.events.Event<
+        (
+          message: any,
+          sender: MessageSender,
+          sendResponse: (response: any) => void,
+        ) => Promise<any> | boolean | void
+      > {}
+
+  export interface PortDisconnectEvent
+    extends browser.events.Event<(port: Port) => void> {}
+
+  export interface PortMessageEvent
+    extends browser.events.Event<(message: any, port: Port) => void> {}
+
+  export interface Port {
+    postMessage: (message: Object) => void;
+    disconnect: () => void;
+    error: {message: string} | null;
+    sender?: MessageSender;
+    onDisconnect: PortDisconnectEvent;
+    onMessage: PortMessageEvent;
+    name: string;
+  }
+
+  export interface ExtensionConnectEvent
+    extends browser.events.Event<(port: Port) => void> {}
+
+  export var onConnect: ExtensionConnectEvent;
+
+  export interface ConnectInfo {
+    name?: string;
+  }
+
+  export function connect(connectInfo?: ConnectInfo): Port;
+
+  export const onMessage: MessageReceivedEvent;
+}
+
 declare namespace browser.webRequest {
   export interface AuthCredentials {
     username: string;

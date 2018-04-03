@@ -17,8 +17,15 @@
     "<all_urls>"
   ],
   "background": {
-    "scripts": ["main.bundle.js"]
+    "scripts": ["background.bundle.js"]
   },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.bundle.js"],
+      "run_at": "document_start"
+    }
+  ],
   "omnibox": {
     "keyword": "rover"
   }
