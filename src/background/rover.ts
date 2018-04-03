@@ -1,4 +1,4 @@
-import {find} from 'lodash';
+import find = require('lodash/find');
 import {
   addOverride,
   editOverride,

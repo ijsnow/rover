@@ -1,4 +1,4 @@
-import {find} from 'lodash';
+import find = require('lodash/find');
 import {addOverride, getOverrides, Override} from '../shared/storage';
 import add from './actions/add';
 import duplicate from './actions/duplicate';

@@ -1,4 +1,4 @@
-import {without} from 'lodash';
+import without = require('lodash/without');
 import {Message} from '../shared/messaging';
 
 export class Messager {
