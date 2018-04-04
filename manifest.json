@@ -9,6 +9,10 @@
   },
   "version": "0.0.1",
   "homepage_url": "https://github.com/ijsnow/rover",
+  "icons": {
+    "48": "assets/48x48/rover.svg",
+    "96": "assets/96x96/rover.svg"
+  },
   "permissions": [
     "storage",
     "tabs",

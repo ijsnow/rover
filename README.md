@@ -1,5 +1,7 @@
 # Rover
 
+![Rover](./assets/72x72/rover.svg)
+
 Override the destination of requests leaving your browser for front end development.
 
 ### Inspired by Resource Override
@@ -10,7 +12,7 @@ make this for Firefox. I'll eventually make this available on Chrome as well as 
 
 ### Why no UI?
 
-Mostly because I'm kinda lazy.
+I'm kinda lazy.
 
 In addition to this, it only made sense for me to create a workflow that allows me to use all the features of the tool without moving my hands from keyboard to mouse and back.
 

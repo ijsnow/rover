@@ -1,0 +1,45 @@
+<svg width="72" height="72" viewBox="0 0 72 72" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Rover</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(811 1343)">
+<g id="Rover">
+<g id="Rectangle 2">
+<use xlink:href="#path0_fill" transform="translate(-799 -1343)" fill="#2D9CDB"/>
+</g>
+<g id="Wheel">
+<g id="Ellipse">
+<use xlink:href="#path1_fill" transform="translate(-811 -1295)" fill="#333333"/>
+</g>
+<g id="Ellipse 2.1">
+<use xlink:href="#path2_fill" transform="translate(-803 -1287)" fill="#C4C4C4"/>
+</g>
+</g>
+<g id="Wheel">
+<g id="Ellipse">
+<use xlink:href="#path1_fill" transform="translate(-787 -1295)" fill="#333333"/>
+</g>
+<g id="Ellipse 2.1">
+<use xlink:href="#path2_fill" transform="translate(-779 -1287)" fill="#C4C4C4"/>
+</g>
+</g>
+<g id="Wheel">
+<g id="Ellipse">
+<use xlink:href="#path1_fill" transform="translate(-763 -1295)" fill="#333333"/>
+</g>
+<g id="Ellipse 2.1">
+<use xlink:href="#path2_fill" transform="translate(-755 -1287)" fill="#C4C4C4"/>
+</g>
+</g>
+<g id="Rectangle 3">
+<use xlink:href="#path3_fill" transform="translate(-775 -1327)" fill="#C4C4C4"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 0 0L 48 0L 48 60L 0 60L 0 0Z"/>
+<path id="path1_fill" d="M 24 12C 24 18.6274 18.6274 24 12 24C 5.37258 24 0 18.6274 0 12C 0 5.37258 5.37258 0 12 0C 18.6274 0 24 5.37258 24 12Z"/>
+<path id="path2_fill" d="M 8 4C 8 6.20914 6.20914 8 4 8C 1.79086 8 0 6.20914 0 4C 0 1.79086 1.79086 0 4 0C 6.20914 0 8 1.79086 8 4Z"/>
+<path id="path3_fill" d="M 0 0L 24 0L 24 20.25L 0 20.25L 0 0Z"/>
+</defs>
+</svg>
+
