@@ -4,6 +4,10 @@
 
 Override the destination of requests leaving your browser for front end development.
 
+### Installation
+
+Install via the [FireFox Add-Ons store](https://addons.mozilla.org/en-US/firefox/addon/rover/).
+
 ### Inspired by Resource Override
 
 I used [Resource Override](https://github.com/kylepaulsen/ResourceOverride) very heavily in my day to day
