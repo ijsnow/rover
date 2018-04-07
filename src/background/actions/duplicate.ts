@@ -1,34 +1,30 @@
-import {addOverride, getOverrides, Override} from '../../shared/storage';
-import {Action, ActionMatch, MenuItem} from '../omnicli';
+import { Command, Suggestion } from 'omnicli';
+import { addOverride, getOverrides, Override } from '../../shared/storage';
 import Rover from '../rover';
 
-function handler([from, to]: string[]): Promise<void> {
-  return addOverride({from, to});
+function action([from, to]: string[]): void {
+  addOverride({ from, to });
 }
 
-function getMenuItems(match: ActionMatch): Promise<MenuItem[]> {
+function getSuggestions(args: string[]): Promise<Suggestion[]> {
   return getOverrides().then(overrides => {
     if (overrides.length === 0) {
       return [
         {
           description: 'No items to duplicate',
-          value: match.command,
+          content: '',
         },
       ];
     }
 
-    const menuItems: MenuItem[] = [];
-    const usage = match.action.usage;
-    if (usage) {
-      menuItems.push({
-        description: usage,
-        value: match.command,
-      });
-    }
+    const menuItems: Suggestion[] = [];
+    menuItems.push({
+      description: 'duplicate <from> <to>',
+      content: '',
+    });
 
     let listToSuggest = overrides;
 
-    const args = match.args;
     if (args.length > 0) {
       const [atRaw] = args;
       const at = parseInt(atRaw, 10);
@@ -41,18 +37,19 @@ function getMenuItems(match: ActionMatch): Promise<MenuItem[]> {
       listToSuggest.map((override, idx) => ({
         description: `[${idx}] ${override.from} -> ${override.to}`,
         // `duplicate` is just adding a new one so we should just map the suggestions there.
-        value: `add ${override.from} ${override.to}`,
+        content: `add ${override.from} ${override.to}`,
       })),
     );
   });
 }
 
-const action: Action = {
-  command: ['duplicate', 'dup', 'd'],
-  getMenuItems,
+const command: Command = {
+  name: 'duplicate',
+  alias: ['dup', 'd'],
+  getSuggestions,
   // `handle` will only get called if they type everything out instead of using a suggestion.
-  handler,
-  usage: 'duplicate <from> <to>',
+  action,
+  description: 'duplicate <from> <to>',
 };
 
-export default action;
+export default command;

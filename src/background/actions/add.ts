@@ -1,15 +1,16 @@
-import {addOverride, Override} from '../../shared/storage';
-import OmniCli, {Action, menuItemsFromUsage} from '../omnicli';
+import { Command } from 'omnicli';
 
-function handler([from, to]: string[]): Promise<void> {
-  return addOverride({from, to});
+import { addOverride, Override } from '../../shared/storage';
+
+function action([from, to]: string[]) {
+  addOverride({ from, to });
 }
 
-const action: Action = {
-  command: [OmniCli.DEFAULT, 'add', 'a'],
-  getMenuItems: menuItemsFromUsage,
-  handler,
-  usage: 'add <from> <to>',
+const command: Command = {
+  name: 'add',
+  alias: ['a'],
+  action,
+  description: 'add <from> <to>',
 };
 
-export default action;
+export default command;

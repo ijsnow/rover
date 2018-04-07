@@ -18,6 +18,10 @@ interface StorageItemsChange {
 
 const area = browser.storage.sync;
 
+export function initialize(): void {
+  getOverrides().then(overrides => area.set({overrides: overrides || []}));
+}
+
 export function getOverrides(): Promise<Override[]> {
   return area.get('overrides').then(({overrides}: StorageItems) => overrides);
 }

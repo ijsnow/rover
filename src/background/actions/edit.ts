@@ -1,52 +1,50 @@
-import {editOverride, getOverrides, Override} from '../../shared/storage';
-import {Action, ActionMatch, MenuItem} from '../omnicli';
+import { Command, Suggestion } from 'omnicli';
+
+import { editOverride, getOverrides, Override } from '../../shared/storage';
 import Rover from '../rover';
 
-function handler([atRaw, from, to]: string[]): Promise<void> {
+function action([atRaw, from, to]: string[]): void | Error {
   const at = parseInt(atRaw, 10);
   if (isNaN(at)) {
-    return Promise.reject(new Error('input was not an integer'));
+    return new Error('input was not an integer');
   }
 
-  return editOverride(at, {from, to});
+  editOverride(at, { from, to });
 }
 
-function getMenuItems(match: ActionMatch): Promise<MenuItem[]> {
+function getSuggestions(args: string[]): Promise<Suggestion[]> {
   return getOverrides().then(overrides => {
     if (overrides.length === 0) {
       return [
         {
           description: 'No items to edit',
-          value: match.command,
+          content: '',
         },
       ];
     }
 
-    const menuItems: MenuItem[] = [];
-    const usage = match.action.usage;
-    if (usage) {
-      menuItems.push({
-        description: usage,
-        value: match.command,
-      });
-    }
+    const suggestions: Suggestion[] = [
+      {
+        description: 'edit <index> <from> <to>',
+        content: '',
+      },
+    ];
 
-    return menuItems.concat(
+    return suggestions.concat(
       overrides.map((override, idx) => ({
         description: `${override.from} -> ${override.to}`,
-        value: `${match.command} ${idx.toString()} ${override.from} ${
-          override.to
-        }`,
+        content: `${idx.toString()} ${override.from} ${override.to}`,
       })),
     );
   });
 }
 
-const action: Action = {
-  command: ['edit', 'e'],
-  getMenuItems,
-  handler,
-  usage: 'edit <index> <from> <to>',
+const command: Command = {
+  name: 'edit',
+  alias: ['e'],
+  getSuggestions,
+  action,
+  description: 'edit <index> <from> <to>',
 };
 
-export default action;
+export default command;
